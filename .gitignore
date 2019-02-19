@@ -5,7 +5,7 @@
 
 # Log files (if you are creating logs in debug mode, uncomment this)
 *.logs
-
+*.log
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -13,3 +13,4 @@
 !.vscode/extensions.json
 
 .dist
+
