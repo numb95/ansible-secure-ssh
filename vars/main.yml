@@ -1,0 +1,11 @@
+---
+# vars file for ansible-secure-ssh
+sshd_default_port: 9232
+allowed_user: ansible
+sshd_listen_adress: 192.168.1.1
+knock_close_port_1: 4441
+knock_close_port_2: 4442
+knock_close_port_3: 4443
+knock_open_port_1: 5551
+knock_open_port_2: 5552
+knock_open_port_3: 5553

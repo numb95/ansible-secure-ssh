@@ -1,0 +1,38 @@
+Port {{ sshd_default_port }}
+ListenAddress {{ sshd_listen_adress }}
+LogLevel VERBOSE
+LoginGraceTime 100
+PermitRootLogin no
+AllowUsers {{ allowed_user }}
+StrictModes yes
+PubkeyAuthentication yes
+IgnoreRhosts yes
+PasswordAuthentication no
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+UsePAM yes
+AllowAgentForwarding no
+AllowTcpForwarding no
+X11Forwarding no
+PrintMotd yes
+PrintLastLog yes
+#TCPKeepAlive yes
+#UseLogin no
+#PermitUserEnvironment no
+#Compression delayed
+ClientAliveInterval 300
+ClientAliveCountMax 0
+#UseDNS no
+#PidFile /var/run/sshd.pid
+MaxStartups 2
+#PermitTunnel no
+#ChrootDirectory none
+#VersionAddendum none
+#Banner none
+Subsystem	sftp	/usr/lib/openssh/sftp-server
+Protocol 2
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostKey /etc/ssh/ssh_host_rsa_key
+KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com

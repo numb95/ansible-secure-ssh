@@ -1,0 +1,25 @@
+---
+- name: Clean the keys
+  file:
+    state: absent
+    path: "/etc/sshd/ssh_host_*key*"
+- name: Generate new authentication keys
+  command: "{{ item }}"
+  with_items:
+    - ssh-keygen -t ed25519 -f ssh_host_ed25519_key -N ""
+    - ssh-keygen -t rsa -b 4096 -f ssh_host_rsa_key -N ""
+- name: modify moduli
+  command: "{{ item }}"
+  with_items:
+    - mv /etc/ssh/moduli /etc/ssh/moduli.old
+    - ssh-keygen -G /etc/ssh/moduli.new -b 4096
+    - ssh-keygen -T /etc/ssh/moduli.safe -f /etc/ssh/moduli.new
+    - mv /etc/ssh/moduli.safe /etc/ssh/moduli
+    - rm /etc/ssh/moduli.safe
+- name: replace the sshd_config
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+- name: check configs
+  command: sshd -t
+  notify: restart ssh

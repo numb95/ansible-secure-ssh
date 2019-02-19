@@ -1,0 +1,7 @@
+---
+# handlers file for ansible-secure-ssh
+- name: restart ssh
+  service:
+    name: ssh
+    state: restart
+    enabled: yes

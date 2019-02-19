@@ -1,0 +1,8 @@
+---
+- name: install and enable knockd
+  apt:
+    name: "{{ items }}"
+    state: present
+  with_items:
+    - knockd
+    - fail2ban

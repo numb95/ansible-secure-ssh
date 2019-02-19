@@ -1,0 +1,5 @@
+---
+- include_tasks: upgrade.yml
+- include_tasks: sshdconfigfile.yml
+- include_tasks: installpackages.yml
+- include_tasks: configknockd.yml

@@ -1,0 +1,14 @@
+[options]
+        UseSyslog
+ 
+[openSSH]
+        sequence    = {{knock_open_port_1}},{{knock_open_port_2}},{{knock_open_port_3}}
+        seq_timeout = 5
+        command     = /sbin/iptables -A INPUT -s %IP% -p tcp --dport 22 -j ACCEPT
+        tcpflags    = syn
+ 
+[closeSSH]
+        sequence    = {{knock_close_port_1}},{{knock_close_port_2}},{{knock_close_port_3}}
+        seq_timeout = 5
+        command     = /sbin/iptables -D INPUT -s %IP% -p tcp --dport 22 -j ACCEPT
+        tcpflags    = syn

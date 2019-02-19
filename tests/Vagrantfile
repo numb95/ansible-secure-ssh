@@ -1,0 +1,25 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  boxes = [
+    { :name => "ubuntu-vmbox", :box => "ubuntu/bionic64" }
+      ]
+
+  boxes.each do |opts|
+    config.vm.define opts[:name] do |config|
+      config.vm.box = opts[:box]
+      if opts[:name] == boxes.last[:name]
+        config.vm.provision "shell",
+        inline: "apt-get install python3"
+        config.vm.provision "ansible" do |ansible|
+          ansible.extra_vars = {
+            ansible_python_interpreter: "/usr/bin/python3",
+           }
+          ansible.playbook = "test.yml"
+          ansible.limit = "all"
+      end
+    end
+  end
+end
+end

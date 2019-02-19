@@ -1,0 +1,8 @@
+---
+- name: Update system packages
+  apt:
+    name: "*"
+    state: latest
+    force_apt_get: True
+  when: ansible_os_family == "Debian"
+  notify: restart ssh
